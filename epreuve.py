@@ -155,6 +155,21 @@ class output :
 								nb_items = commande[1]
 								));
 
+	'''
+		Renseigne les Loads d'un drone pour un wh :
+	'''
+	def wr_load( self, drone, wh, liste_item ) :
+		with open(self.output_file, 'w') as f :
+			uniq_l = set( [ (val,liste_item.count(val)) for val in sorted(liste_item) ] );
+			for commande in uniq_l :
+				f.write('{dr_id} D {wh_id} {item_type} {nb_items}'.format(
+								dr_id = drone.droneid,
+								wh_id = wh_l.index(wh),
+								item_type = commande[0],
+								nb_items = commande[1]
+								));
+		
+
 
 ''' Fonctions de vérification : '''
 
