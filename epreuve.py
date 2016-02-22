@@ -114,7 +114,14 @@ class drone :
 		for item in self.panier :
 			order.pl.remove(item);
 		self.panier.clear();
-		
+	
+	'''
+		On peut wait à tout moment :
+		la prochaine fois que le drone pourra être 
+		solicité est retardée de 'amount' tours
+	'''
+	def wait( self, amount ) :
+		self.turns += amount;
 		
 		
 class drone_fleet :
