@@ -146,7 +146,7 @@ class output :
 	'''
 	def wr_delivery( self, drone, order ) :
 		with open(self.output_file, 'w') as f :
-			uniq_l = set( [ (val,drone.panier.count(val)) for val in sorted(drone.panier) ] );
+			uniq_l = set( [ (val,drone.panier.count(val)) for val in drone.panier ] );
 			for commande in uniq_l :
 				f.write('{dr_id} D {ord_id} {item_type} {nb_items}'.format(
 								dr_id = drone.droneid,
@@ -160,7 +160,7 @@ class output :
 	'''
 	def wr_load( self, drone, wh, liste_item ) :
 		with open(self.output_file, 'w') as f :
-			uniq_l = set( [ (val,liste_item.count(val)) for val in sorted(liste_item) ] );
+			uniq_l = set( [ (val,liste_item.count(val)) for val in liste_item ] );
 			for commande in uniq_l :
 				f.write('{dr_id} D {wh_id} {item_type} {nb_items}'.format(
 								dr_id = drone.droneid,
