@@ -148,9 +148,23 @@ class output :
 		with open(self.output_file, 'w') as f :
 			uniq_l = set( [ (val,drone.panier.count(val)) for val in drone.panier ] );
 			for commande in uniq_l :
-				f.write('{dr_id} D {ord_id} {item_type} {nb_items}'.format(
+				f.write('{dr_id} D {ord_id} {item_type} {nb_items}\n'.format(
 								dr_id = drone.droneid,
 								ord_id = order_l.index(order),
+								item_type = commande[0],
+								nb_items = commande[1]
+								));
+
+	'''
+		Renseigne les Unloads d'un drone pour un wh :
+	'''
+	def wr_unload( self, drone, wh ) :
+		with open(self.output_file, 'w') as f :
+			uniq_l = set( [ (val,drone.panier.count(val)) for val in drone.panier ] );
+			for commande in uniq_l :
+				f.write('{dr_id} U {wh_id} {item_type} {nb_items}\n'.format(
+								dr_id = drone.droneid,
+								wh_id = wh_l.index(wh),
 								item_type = commande[0],
 								nb_items = commande[1]
 								));
@@ -162,13 +176,21 @@ class output :
 		with open(self.output_file, 'w') as f :
 			uniq_l = set( [ (val,liste_item.count(val)) for val in liste_item ] );
 			for commande in uniq_l :
-				f.write('{dr_id} D {wh_id} {item_type} {nb_items}'.format(
+				f.write('{dr_id} L {wh_id} {item_type} {nb_items}\n'.format(
 								dr_id = drone.droneid,
 								wh_id = wh_l.index(wh),
 								item_type = commande[0],
 								nb_items = commande[1]
 								));
-		
+
+	'''	
+		Renseigne les waits d'un drone :
+	'''
+	def wr_wait( self, drone, turns ) :
+		with open(self.output_file, 'w') as f :
+			f.write('{dr_id} W {t}\n'.format(
+						  dr_id = drone.droneid,
+							t = turns));
 
 
 ''' Fonctions de vérification : '''
