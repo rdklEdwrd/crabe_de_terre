@@ -133,6 +133,29 @@ class drone_fleet :
 		self.fleet.append(drone);
 
 
+class output :
+	""" Le but de cette classe est de gérer
+	les entrées qui vont constituer le fichier d'output
+	"""
+
+	def __init__( self, output_file ) :
+		self.output_file = output_file;
+
+	'''
+		Renseigne les Delivery d'un drone pour une commande :
+	'''
+	def wr_delivery( self, drone, order ) :
+		with open(self.output_file, 'w') as f :
+			uniq_l = set( [ (val,drone.panier.count(val)) for val in sorted(drone.panier) ] );
+			for commande in uniq_l :
+				f.write('{dr_id} D {ord_id} {item_type} {nb_items}'.format(
+								dr_id = drone.droneid,
+								ord_id = order_l.index(order),
+								item_type = commande[0],
+								nb_items = commande[1]
+								));
+
+
 ''' Fonctions de vérification : '''
 
 def charge_ok( liste_item ) :
